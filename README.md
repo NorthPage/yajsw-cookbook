@@ -89,7 +89,7 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
       <td>Array</td>
       <td>The array of application configurations (if not using data bags).</td>
       <td>
-          ```
+          ```json
             [{
               'name' => 'myapp',
               'user' => 'yajsw',
