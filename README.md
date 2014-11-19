@@ -88,23 +88,23 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
       <td><tt>node['yajsw']['apps']</tt></td>
       <td>Array</td>
       <td>The array of application configurations (if not using data bags).</td>
-      <td>
-          ```json
-            [{
-              'name' => 'myapp',
-              'user' => 'yajsw',
-              'initmemory' => 64,
-              'maxmemory' => 256,
-              'mainclass' => 'com.company.myapp',
-              'jar' => 'lib/com.company.myapp.jar',
-              'logfile' => {
-                'maxfiles' => 10,
-                'maxsize' => '10m',
-                'loglevel' => 'INFO'
-              }
-            }]
-          ```
-      </td>
+      <td><pre>
+  ```json
+    [{
+      'name' => 'myapp',
+      'user' => 'yajsw',
+      'initmemory' => 64,
+      'maxmemory' => 256,
+      'mainclass' => 'com.company.myapp',
+      'jar' => 'lib/com.company.myapp.jar',
+      'logfile' => {
+        'maxfiles' => 10,
+        'maxsize' => '10m',
+        'loglevel' => 'INFO'
+      }
+    }]
+  ```
+      </pre></td>
     </tr>
 </table>
 
