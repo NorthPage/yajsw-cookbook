@@ -89,7 +89,6 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
       <td>Array</td>
       <td>The array of application configurations (if not using data bags).</td>
       <td><pre>
-  ```json
     [{
       'name' => 'myapp',
       'user' => 'yajsw',
@@ -103,7 +102,6 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
         'loglevel' => 'INFO'
       }
     }]
-  ```
       </pre></td>
     </tr>
 </table>
