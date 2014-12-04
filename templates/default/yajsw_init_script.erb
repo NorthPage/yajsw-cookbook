@@ -9,8 +9,8 @@
 # Description: <%= @appname %>
 ### END INIT INFO
 # config: <%= @apphome %>/conf/wrapper.conf
-# pidfile: <%= @pidfile_dir %>/wrapper.dmo-admin.pid
-# apppidfile: <%= @pidfile_dir %>/wrapper.java.dmo-admin.pid
+# pidfile: <%= @pidfile_dir %>/wrapper<%= @appname %>.pid
+# apppidfile: <%= @pidfile_dir %>/wrapper.java.<%= @appname %>.pid
 #-----------------------------------------------------------------------------
 # YAJSW sh script template.  Suitable for starting and stopping
 #  wrapped daemon on POSIX platforms.
@@ -24,11 +24,11 @@ java -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false
 }
 
 stopit() {
-echo "Stopping dmo-admin ..."
+echo "Stopping <%= @appname %> ..."
 java -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -px ${APP_HOME}/conf/wrapper.conf
 }
 startit() {
-echo "Starting dmo-admin ..."
+echo "Starting <%= @appname %> ..."
 java -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -tx ${APP_HOME}/conf/wrapper.conf
 }
 
