@@ -123,6 +123,30 @@ Include `yajsw` in your node's `run_list`:
 The default implementation will install yajsw in `/usr/local/` and create an application dir in `/usr/local/yajsw_apps`.
 
 
+### LWRP
+
+If you prefer, you can use the YAJSW recipes individually, and configure your application with the included LWRP.
+
+*Note:* The LWRP will not install yajsw, use `recipe[yajsw::package]` for that.
+
+### yajsw_app
+
+yajsw_app will configure an instance of YAJSW
+
+```ruby
+  logfile = { 'maxfiles' => 10, 'maxsize' => '10m', 'loglevel' => 'INFO' }
+  yajsw_app 'myapp' do
+    user 'yajsw'
+    mainclass 'com.company.myapp'
+    jar 'lib/com.company.myapp.jar'
+    initmemory 16
+    maxmemory 256
+    logfile logfile
+    create_user true
+    action [:create, :update]
+  end
+```
+
 ### Data Bags
 
 TODO: implement this functionality
