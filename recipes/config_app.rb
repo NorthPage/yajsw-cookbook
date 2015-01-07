@@ -31,6 +31,7 @@ apps.each do |app|
     jar app['jar']
     initmemory app['initmemory']
     maxmemory app['maxmemory']
+    additional app['java_additional']
     logfile app['logfile']
     create_user true
     action [:create, :update]
