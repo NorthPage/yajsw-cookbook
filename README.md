@@ -139,6 +139,7 @@ yajsw_app will configure an instance of YAJSW
     user 'yajsw'
     mainclass 'com.company.myapp'
     jar 'lib/com.company.myapp.jar'
+    additional ['-server']
     initmemory 16
     maxmemory 256
     logfile logfile

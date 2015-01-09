@@ -277,7 +277,9 @@ wrapper.filter.script.0.args=Exception
 #********************************************************************
 placeHolderSoGenPropsComeHere=
 wrapper.java.command = java
-wrapper.java.additional.1 = -server
+<% @additional.each_index do |a| -%>
+wrapper.java.additional.<%= a %> = <%= @additional[a] %>
+<% end %>
 wrapper.java.initmemory=<%= @initmemory %>
 wrapper.java.maxmemory=<%= @maxmemory %>
 wrapper.java.app.mainclass=<%= @mainclass %>

@@ -27,6 +27,7 @@ default['yajsw']['apps'] = [{
                               'maxmemory' => 256,
                               'mainclass' => 'com.company.myapp',
                               'jar' => 'lib/com.company.myapp.jar',
+                              'additional' => ['-server', '-Dfile.encoding=UTF-8'],
                               'logfile' => {
                                 'maxfiles' => 10,
                                 'maxsize' => '10m',

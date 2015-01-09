@@ -129,6 +129,7 @@ def populate_wrapper
       :appname => appname,
       :appuser => appuser,
       :jar => new_resource.jar,
+      :additional => new_resource.additional,
       :mainclass => new_resource.mainclass,
       :initmemory => new_resource.initmemory,
       :maxmemory => new_resource.maxmemory,

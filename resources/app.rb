@@ -28,6 +28,7 @@ attribute :mainclass,   :kind_of => String, :required => true
 attribute :jar,         :kind_of => String, :required => true
 attribute :initmemory,  :kind_of => Integer, :default => 64
 attribute :maxmemory,   :kind_of => Integer, :default => 256
+attribute :additional,  :kind_of => Array, :default => []
 attribute :logfile,     :kind_of => Hash, :default => { 'maxfiles' => 10,
                                                         'maxsize' => '10m',
                                                         'loglevel' => 'INFO' }
