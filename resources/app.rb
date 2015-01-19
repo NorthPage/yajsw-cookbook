@@ -25,10 +25,12 @@ attribute :home,        :kind_of => String, :default => '/usr/local/yajsw-stable
 attribute :pidfile_dir, :kind_of => String, :default => '/var/run'
 attribute :user,        :kind_of => String, :default => 'root'
 attribute :mainclass,   :kind_of => String, :required => true
-attribute :jar,         :kind_of => String, :required => true
+attribute :jar,         :kind_of => String
 attribute :initmemory,  :kind_of => Integer, :default => 64
 attribute :maxmemory,   :kind_of => Integer, :default => 256
+attribute :classpath,   :kind_of => Array, :default => []
 attribute :additional,  :kind_of => Array, :default => []
+attribute :parameters,  :kind_of => Array, :default => []
 attribute :logfile,     :kind_of => Hash, :default => { 'maxfiles' => 10,
                                                         'maxsize' => '10m',
                                                         'loglevel' => 'INFO' }

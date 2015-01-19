@@ -44,7 +44,7 @@ wrapper.tmp.path = ${jna_tmpdir}
 #********************************************************************
 
 # Java Application main class
-wrapper.java.app.mainclass=
+#wrapper.java.app.mainclass=
 
 # or jar file
 #wrapper.java.app.jar=
@@ -277,10 +277,22 @@ wrapper.filter.script.0.args=Exception
 #********************************************************************
 placeHolderSoGenPropsComeHere=
 wrapper.java.command = java
+
+<% @classpath.each_index do |c| -%>
+wrapper.java.classpath.<%= c %> = <%= @classpath[c] %>
+<% end %>
+
 <% @additional.each_index do |a| -%>
 wrapper.java.additional.<%= a %> = <%= @additional[a] %>
 <% end %>
+
+<% @parameters.each_index do |p| -%>
+wrapper.app.parameter.<%= p %> = <%= @parameters[p] %>
+<% end %>
+
 wrapper.java.initmemory=<%= @initmemory %>
 wrapper.java.maxmemory=<%= @maxmemory %>
 wrapper.java.app.mainclass=<%= @mainclass %>
+<% if @jar -%>
 wrapper.java.app.jar=<%= @jar %>
+<% end %>
