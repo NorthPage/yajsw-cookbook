@@ -96,6 +96,9 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
       'maxmemory' => 256,
       'mainclass' => 'com.company.myapp',
       'jar' => 'lib/com.company.myapp.jar',
+      'classpath' => [],
+      'additional' => ['-server', '-Dfile.encoding=UTF-8'],
+      'parameters' => ['-a', '-b', 'foobar', '-c'],
       'logfile' => {
         'maxfiles' => 10,
         'maxsize' => '10m',
@@ -139,7 +142,9 @@ yajsw_app will configure an instance of YAJSW
     user 'yajsw'
     mainclass 'com.company.myapp'
     jar 'lib/com.company.myapp.jar'
-    additional ['-server']
+    classpath []
+    additional ['-server', '-Dfile.encoding=UTF-8']
+    parameters ['-a', '-b', 'foobar', '-c']
     initmemory 16
     maxmemory 256
     logfile logfile
