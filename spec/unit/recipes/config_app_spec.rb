@@ -13,7 +13,7 @@ describe 'yajsw::config_app' do
 
       context "on #{platform.capitalize} #{version}" do
         let (:chef_run) do
-          ChefSpec::Runner.new(log_level: :warn, platform: platform, version: version) do |node|
+          ChefSpec::Runner.new(step_into: ['yajsw_app'], log_level: :warn, platform: platform, version: version) do |node|
             # set additional node attributes here
           end.converge(described_recipe)
         end
@@ -39,6 +39,14 @@ describe 'yajsw::config_app' do
 
         it "should render the yajsw wrapper config for the default app" do
           expect(chef_run).to render_file('/usr/local/yajsw_apps/myapp/conf/wrapper.conf').with_content(/wrapper\.java\.app\.jar=lib\/com\.company\.myapp\.jar$/)
+        end
+
+        it "should create yajsw app myapp" do
+          expect(chef_run).to create_yajsw_app("myapp")
+        end
+
+        it "should update yajsw app myapp" do
+          expect(chef_run).to update_yajsw_app("myapp")
         end
       end
     end
