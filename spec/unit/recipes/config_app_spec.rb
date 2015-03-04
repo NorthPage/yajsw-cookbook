@@ -4,8 +4,8 @@ require 'spec_helper'
 describe 'yajsw::config_app' do
 
   platforms = {
-      'centos' => ['6.5'],
-      'ubuntu' => ['12.04', '14.04']
+      'centos' => ['6.6'],
+      'ubuntu' => ['14.04']
   }
 
   platforms.each do |platform, versions|
@@ -13,7 +13,7 @@ describe 'yajsw::config_app' do
 
       context "on #{platform.capitalize} #{version}" do
         let (:chef_run) do
-          ChefSpec::Runner.new(step_into: ['yajsw_app'], log_level: :warn, platform: platform, version: version) do |node|
+          ChefSpec::SoloRunner.new(step_into: ['yajsw_app'], log_level: :error, platform: platform, version: version) do |node|
             # set additional node attributes here
           end.converge(described_recipe)
         end
