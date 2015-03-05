@@ -8,7 +8,7 @@ end
 
 group :unit do
   gem 'berkshelf'
-  gem 'chefspec', '~> 3.1'
+  gem 'chefspec'
 end
 
 group :integration do
@@ -16,5 +16,5 @@ group :integration do
   gem 'kitchen-docker'
   gem 'kitchen-vagrant'
   gem 'serverspec'
-  gem 'busser-serverspec', '~> 0.2.6'
+  gem 'busser-serverspec'
 end
