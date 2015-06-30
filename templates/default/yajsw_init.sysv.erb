@@ -20,16 +20,16 @@ YAJSW_HOME=<%= @yajswhome %>
 PIDFILE=<%= @pidfile_dir %>/wrapper.<%= @appname %>.pid
 
 status() {
-java -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -qx ${APP_HOME}/conf/wrapper.conf
+<%= @java %> -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -qx ${APP_HOME}/conf/wrapper.conf
 }
 
 stopit() {
 echo "Stopping <%= @appname %> ..."
-java -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -px ${APP_HOME}/conf/wrapper.conf
+<%= @java %> -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -px ${APP_HOME}/conf/wrapper.conf
 }
 startit() {
 echo "Starting <%= @appname %> ..."
-java -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -tx ${APP_HOME}/conf/wrapper.conf
+<%= @java %> -Dwrapper.pidfile=${PIDFILE} -Dwrapper.service=true -Dwrapper.visible=false -Djna_tmpdir=${APP_HOME}/tmp -Dwrapper_home=${YAJSW_HOME} -Dapp_home=${APP_HOME} -jar ${YAJSW_HOME}/wrapper.jar -tx ${APP_HOME}/conf/wrapper.conf
 }
 
 

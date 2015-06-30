@@ -37,3 +37,9 @@ default['yajsw']['apps'] = [{
                               }
                             }]
 
+# determine if we use systemd or initd
+if node['platform_family'] == 'rhel' && Gem::Version.new(node['platform_version']) >= Gem::Version.new('7.0.0')
+  default['yajsw']['init_system'] = 'systemd'
+else
+  default['yajsw']['init_system'] = 'initd'
+end

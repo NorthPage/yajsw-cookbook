@@ -1,0 +1,24 @@
+##
+# systemd unit for <%= @appname %>
+##
+
+[Unit]
+Description=<%= @appname %>
+After=syslog.target
+
+[Service]
+Type=forking
+PIDFile=<%= @pidfile_dir %>/wrapper.<%= @appname %>.pid
+ExecStart=<%= @java %> -Dwrapper.pidfile=<%= @pidfile_dir %>/wrapper.<%= @appname %>.pid \
+  -Dwrapper.service=true -Dwrapper.visible=false \
+  -Djna_tmpdir=<%= @apphome %>/tmp -Dwrapper_home=<%= @yajswhome %> \
+  -Dapp_home=<%= @apphome %> -jar <%= @yajswhome %>/wrapper.jar \
+  -tx <%= @apphome %>/conf/wrapper.conf
+ExecStop=<%= @java %> -Dwrapper.pidfile=<%= @pidfile_dir %>/wrapper.<%= @appname %>.pid \
+  -Dwrapper.service=true -Dwrapper.visible=false \
+  -Djna_tmpdir=<%= @apphome %>/tmp -Dwrapper_home=<%= @yajswhome %> \
+  -Dapp_home=<%= @apphome %> -jar <%= @yajswhome %>/wrapper.jar \
+  -px <%= @apphome %>/conf/wrapper.conf
+
+[Install]
+WantedBy=multi-user.target

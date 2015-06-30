@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Provider:: yajsw_app.rb
 #
-# Copyright (C) 2014 NorthPage
+# Copyright (C) 2015 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -98,21 +98,42 @@ def populate_init
   apphome = "#{appsdir}/#{appname}"
   piddir = new_resource.pidfile_dir
   home = new_resource.home
+  java = new_resource.java
 
   t = template "/etc/init.d/#{appname}" do
-    source 'yajsw_init_script.erb'
+    source 'yajsw_init.sysv.erb'
     cookbook new_resource.cookbook
     variables({
       :appname => appname,
       :pidfile_dir => piddir,
       :apphome => apphome,
-      :yajswhome => home
+      :yajswhome => home,
+      :java => java
     })
     owner 'root'
     group 'root'
     mode 0755
     action :create
+    only_if   { node['yajsw']['init_system'] == 'initd' }
   end
+
+  t = template "/usr/lib/systemd/system/#{appname}.service" do
+    source 'yajsw_init.systemd.erb'
+    cookbook new_resource.cookbook
+    variables({
+      :appname => appname,
+      :pidfile_dir => piddir,
+      :apphome => apphome,
+      :yajswhome => home,
+      :java => java
+    })
+    owner 'root'
+    group 'root'
+    mode 0755
+    action :create
+    only_if   { node['yajsw']['init_system'] == 'systemd' }
+  end
+
   new_resource.updated_by_last_action(t.updated_by_last_action?)
 end
 

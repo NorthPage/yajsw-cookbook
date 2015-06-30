@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Resource:: yajsw_app
 #
-# Copyright (C) 2014 NorthPage
+# Copyright (C) 2015 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -35,5 +35,6 @@ attribute :logfile,     :kind_of => Hash, :default => { 'maxfiles' => 10,
                                                         'maxsize' => '10m',
                                                         'loglevel' => 'INFO' }
 attribute :cookbook,    :kind_of => String, :default => 'yajsw'
+attribute :java,        :kind_of => String, :default => "#{node['java']['java_home']}/bin/java"
 attribute :create_user, :kind_of => [TrueClass, FalseClass], :default => false
 attribute :delete_user, :kind_of => [TrueClass, FalseClass], :default => false
