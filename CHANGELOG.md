@@ -25,3 +25,7 @@ Update deprecated test platforms and calls
 # 0.2.6
 
 Update download mirror
+
+# 0.3.0
+
+Add support for CentOS 7 and Systemd

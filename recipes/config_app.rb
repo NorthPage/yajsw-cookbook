@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Recipe:: config_app
 #
-# Copyright (C) 2014 NorthPage
+# Copyright (C) 2015 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ apps.each do |app|
     parameters app['parameters']
     logfile app['logfile']
     create_user true
+    java "#{node['java']['java_home']}/bin/java"
     action [:create, :update]
   end
 

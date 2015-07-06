@@ -4,8 +4,8 @@ require 'spec_helper'
 describe 'yajsw::package' do
 
   platforms = {
-      'centos' => ['6.6'],
-      'ubuntu' => ['14.04']
+    'centos' => ['6.6', '7.0'],
+    'ubuntu' => ['14.04']
   }
 
   platforms.each do |platform, versions|
@@ -20,7 +20,7 @@ describe 'yajsw::package' do
 
         let(:install_script) { chef_run.remote_file('/usr/local/yajsw-stable-11.11.zip') }
 
-        it "should download the yajsw archive and notify the installation" do
+        it 'should download the yajsw archive and notify the installation' do
           expect(chef_run).to create_remote_file_if_missing('/usr/local/yajsw-stable-11.11.zip').with(owner: 'root')
           expect(install_script).to notify('libarchive_file[extract_yajsw]').to(:extract).immediately
         end

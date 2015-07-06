@@ -4,17 +4,16 @@ driver:
   config:
     require_chef_omnibus: true
   customize:
-    memory: 2048
-    cpus: 2
-  network:
-    - ["forwarded_port", { guest: 8181, host: 8181 }]
+    memory: 1024
+    cpus: 1
 
 provisioner:
   name: chef_zero
 
 platforms:
-  - name: ubuntu-12.04
-  - name: centos-6.5
+  - name: ubuntu-14.04
+  - name: centos-6.6
+  - name: centos-7.0
 
 suites:
   - name: default
