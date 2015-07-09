@@ -1,7 +1,7 @@
 
 # yajsw download location
 # TODO figure out how to get permalinks from sourceforge
-default['yajsw']['url'] = 'http://downloads.sourceforge.net/project/yajsw/yajsw/yajsw-stable-11.11/yajsw-stable-11.11.zip'
+default['yajsw']['url'] = 'http://iweb.dl.sourceforge.net/project/yajsw/yajsw/yajsw-stable-11.11/yajsw-stable-11.11.zip'
 default['yajsw']['file'] = 'yajsw-stable-11.11.zip'
 default['yajsw']['checksum'] = 'aeb845a7d77184b8a1cbd68ae26c7f07a74952f6e79fb31d3f8f41ba52c4c872'
 default['yajsw']['dirname'] = 'yajsw-stable-11.11'
