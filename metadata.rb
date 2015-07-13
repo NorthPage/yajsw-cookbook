@@ -10,4 +10,4 @@ depends 'maven'
 depends 'git'
 
 depends 'libarchive', '~> 0.4.1'
-depends 'java', '~> 1.28.0'
+depends 'java', '~> 1.0'
