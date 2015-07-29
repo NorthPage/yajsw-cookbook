@@ -29,3 +29,7 @@ Update download mirror
 # 0.3.0
 
 Add support for CentOS 7 and Systemd
+
+# 0.3.1
+
+Upgrade libarchive cookbook

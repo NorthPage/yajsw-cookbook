@@ -8,6 +8,7 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
 
 * Ubuntu 14.x
 * Centos 6.x, 7.x
+* Chef 12.x
 
 ## Attributes
 
