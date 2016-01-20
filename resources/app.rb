@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Resource:: yajsw_app
 #
-# Copyright (C) 2015 NorthPage
+# Copyright (C) 2015-2016 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,22 +19,22 @@
 actions :create, :delete, :update
 default_action :create
 
-attribute :name,        :kind_of => String, :name_attribute => true
-attribute :appsdir,     :kind_of => String, :default => '/usr/local/yajsw_apps'
-attribute :home,        :kind_of => String, :default => '/usr/local/yajsw-stable-11.11'
-attribute :pidfile_dir, :kind_of => String, :default => '/var/run'
-attribute :user,        :kind_of => String, :default => 'root'
-attribute :mainclass,   :kind_of => String, :required => true
-attribute :jar,         :kind_of => String
-attribute :initmemory,  :kind_of => Integer, :default => 64
-attribute :maxmemory,   :kind_of => Integer, :default => 256
-attribute :classpath,   :kind_of => Array, :default => []
-attribute :additional,  :kind_of => Array, :default => []
-attribute :parameters,  :kind_of => Array, :default => []
-attribute :logfile,     :kind_of => Hash, :default => { 'maxfiles' => 10,
-                                                        'maxsize' => '10m',
-                                                        'loglevel' => 'INFO' }
-attribute :cookbook,    :kind_of => String, :default => 'yajsw'
-attribute :java,        :kind_of => String, :default => "#{node['java']['java_home']}/bin/java"
-attribute :create_user, :kind_of => [TrueClass, FalseClass], :default => false
-attribute :delete_user, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :name, kind_of: String, name_attribute: true
+attribute :appsdir, kind_of: String, default: '/usr/local/yajsw_apps'
+attribute :home, kind_of: String, default: '/usr/local/yajsw-stable-11.11'
+attribute :pidfile_dir, kind_of: String, default: '/var/run'
+attribute :user, kind_of: String, default: 'root'
+attribute :mainclass, kind_of: String, required: true
+attribute :jar, kind_of: String
+attribute :initmemory, kind_of: Integer, default: 64
+attribute :maxmemory, kind_of: Integer, default: 256
+attribute :classpath, kind_of: Array, default: []
+attribute :additional, kind_of: Array, default: []
+attribute :parameters, kind_of: Array, default: []
+attribute :logfile, kind_of: Hash, default: { 'maxfiles' => 10,
+                                              'maxsize' => '10m',
+                                              'loglevel' => 'INFO' }
+attribute :cookbook, kind_of: String, default: 'yajsw'
+attribute :java, kind_of: String, default: "#{node['java']['java_home']}/bin/java"
+attribute :create_user, kind_of: [TrueClass, FalseClass], default: false
+attribute :delete_user, kind_of: [TrueClass, FalseClass], default: false

@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Provider:: yajsw_app.rb
 #
-# Copyright (C) 2015 NorthPage
+# Copyright (C) 2015-2016 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,17 +78,17 @@ def create_app_dirs
   apphome = "#{appsdir}/#{appname}"
   appuser = new_resource.user
 
-  %w{ conf deploy tmp log }.each do |d|
+  %w( conf deploy tmp log ).each do |d|
     dir = "#{apphome}/#{d}"
-    unless ::File.directory?(dir)
-      Chef::Log.info "Creating yajsw directory: #{dir}"
-      a = directory dir do
-        recursive true
-        owner appuser
-        action :create
-      end
-      new_resource.updated_by_last_action(a.updated_by_last_action?)
+    next if ::File.directory?(dir)
+
+    Chef::Log.info "Creating yajsw directory: #{dir}"
+    a = directory dir do
+      recursive true
+      owner appuser
+      action :create
     end
+    new_resource.updated_by_last_action(a.updated_by_last_action?)
   end
 end
 
@@ -100,41 +100,45 @@ def populate_init
   home = new_resource.home
   java = new_resource.java
 
-  t = template "/etc/init.d/#{appname}" do
-    source 'yajsw_init.sysv.erb'
-    cookbook new_resource.cookbook
-    variables({
-      :appname => appname,
-      :pidfile_dir => piddir,
-      :apphome => apphome,
-      :yajswhome => home,
-      :java => java
-    })
-    owner 'root'
-    group 'root'
-    mode 0755
-    action :create
-    only_if   { node['yajsw']['init_system'] == 'initd' }
+  if node['yajsw']['init_system'] == 'initd'
+    t = template "/etc/init.d/#{appname}" do
+      source 'yajsw_init.sysv.erb'
+      cookbook new_resource.cookbook
+      owner 'root'
+      group 'root'
+      mode 0755
+      variables(
+        appname: appname,
+        pidfile_dir: piddir,
+        apphome: apphome,
+        yajswhome: home,
+        java: java
+      )
+      action :create
+      only_if { node['yajsw']['init_system'] == 'initd' }
+    end
+    new_resource.updated_by_last_action(t.updated_by_last_action?)
+  elsif node['yajsw']['init_system'] == 'systemd'
+    t = template "/usr/lib/systemd/system/#{appname}.service" do
+      source 'yajsw_init.systemd.erb'
+      cookbook new_resource.cookbook
+      owner 'root'
+      group 'root'
+      mode 0755
+      variables(
+        appname: appname,
+        pidfile_dir: piddir,
+        apphome: apphome,
+        yajswhome: home,
+        java: java
+      )
+      action :create
+      only_if { node['yajsw']['init_system'] == 'systemd' }
+    end
+    new_resource.updated_by_last_action(t.updated_by_last_action?)
+  else
+    Chef::Log.warn('Sorry, your init system is not supported.')
   end
-
-  t = template "/usr/lib/systemd/system/#{appname}.service" do
-    source 'yajsw_init.systemd.erb'
-    cookbook new_resource.cookbook
-    variables({
-      :appname => appname,
-      :pidfile_dir => piddir,
-      :apphome => apphome,
-      :yajswhome => home,
-      :java => java
-    })
-    owner 'root'
-    group 'root'
-    mode 0755
-    action :create
-    only_if   { node['yajsw']['init_system'] == 'systemd' }
-  end
-
-  new_resource.updated_by_last_action(t.updated_by_last_action?)
 end
 
 def populate_wrapper
@@ -146,20 +150,20 @@ def populate_wrapper
   t = template "#{apphome}/conf/wrapper.conf" do
     cookbook new_resource.cookbook
     source 'wrapper.conf.erb'
-    variables({
-      :appname => appname,
-      :appuser => appuser,
-      :jar => new_resource.jar,
-      :classpath => new_resource.classpath,
-      :additional => new_resource.additional,
-      :parameters => new_resource.parameters,
-      :mainclass => new_resource.mainclass,
-      :initmemory => new_resource.initmemory,
-      :maxmemory => new_resource.maxmemory,
-      :logfile => new_resource.logfile
-    })
     owner appuser
     mode 0755
+    variables(
+      appname: appname,
+      appuser: appuser,
+      jar: new_resource.jar,
+      classpath: new_resource.classpath,
+      additional: new_resource.additional,
+      parameters: new_resource.parameters,
+      mainclass: new_resource.mainclass,
+      initmemory: new_resource.initmemory,
+      maxmemory: new_resource.maxmemory,
+      logfile: new_resource.logfile
+    )
   end
   new_resource.updated_by_last_action(t.updated_by_last_action?)
 end

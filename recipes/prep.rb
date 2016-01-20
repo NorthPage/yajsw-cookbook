@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Recipe:: prep
 #
-# Copyright (C) 2015 NorthPage
+# Copyright (C) 2015-2016 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,4 +18,4 @@
 #
 
 node.set['java']['jdk_version'] = '7'
-include_recipe "java::default"
+include_recipe 'java::default'

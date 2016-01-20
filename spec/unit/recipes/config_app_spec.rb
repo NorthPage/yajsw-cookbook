@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-
 describe 'yajsw::config_app' do
-
   platforms = {
     'centos' => ['6.6', '7.0'],
     'ubuntu' => ['14.04']
@@ -10,10 +8,10 @@ describe 'yajsw::config_app' do
 
   platforms.each do |platform, versions|
     versions.each do |version|
-
       context "on #{platform.capitalize} #{version}" do
-        let (:chef_run) do
-          ChefSpec::SoloRunner.new(step_into: ['yajsw_app'], log_level: :error, platform: platform, version: version) do |node|
+        let(:chef_run) do
+          ChefSpec::SoloRunner.new(step_into: ['yajsw_app'], log_level: :error,
+                                   platform: platform, version: version) do
             # set additional node attributes here
           end.converge(described_recipe)
         end
@@ -35,14 +33,17 @@ describe 'yajsw::config_app' do
 
         it 'should render the init script for the default app' do
           if platform == 'centos' && version.to_i >= 7
-            expect(chef_run).to render_file('/usr/lib/systemd/system/myapp.service').with_content(/^PIDFile=\/var\/run\/wrapper.myapp.pid$/)
+            expect(chef_run).to render_file('/usr/lib/systemd/system/myapp.service'
+                                ).with_content(%r{^PIDFile=/var/run/wrapper.myapp.pid$})
           else
-            expect(chef_run).to render_file('/etc/init.d/myapp').with_content(/^APP_HOME=\/usr\/local\/yajsw_apps\/myapp$/)
+            expect(chef_run).to render_file('/etc/init.d/myapp'
+                                ).with_content(%r{^APP_HOME=/usr/local/yajsw_apps/myapp$})
           end
         end
 
         it 'should render the yajsw wrapper config for the default app' do
-          expect(chef_run).to render_file('/usr/local/yajsw_apps/myapp/conf/wrapper.conf').with_content(/wrapper\.java\.app\.jar=lib\/com\.company\.myapp\.jar$/)
+          expect(chef_run).to render_file('/usr/local/yajsw_apps/myapp/conf/wrapper.conf'
+                              ).with_content(%r{wrapper.java.app.jar=lib/com.company.myapp.jar$})
         end
 
         it 'should create yajsw app myapp' do
