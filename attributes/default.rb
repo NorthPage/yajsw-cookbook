@@ -20,8 +20,7 @@ default['yajsw']['data_bag_name'] = 'yajsw_apps'
 default['yajsw']['use_env_data_bags'] = true
 
 # array of yajsw managed applications
-default['yajsw']['apps'] = [{
-                              'name' => 'myapp',
+default['yajsw']['apps'] = [{ 'name' => 'myapp',
                               'user' => 'yajsw',
                               'initmemory' => 64,
                               'maxmemory' => 256,
@@ -38,7 +37,8 @@ default['yajsw']['apps'] = [{
                             }]
 
 # determine if we use systemd or initd
-if node['platform_family'] == 'rhel' && Gem::Version.new(node['platform_version']) >= Gem::Version.new('7.0.0')
+if node['platform_family'] == 'rhel' &&
+   Gem::Version.new(node['platform_version']) >= Gem::Version.new('7.0.0')
   default['yajsw']['init_system'] = 'systemd'
 else
   default['yajsw']['init_system'] = 'initd'

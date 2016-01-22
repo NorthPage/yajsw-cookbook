@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Recipe:: package
 #
-# Copyright (C) 2015 NorthPage
+# Copyright (C) 2015-2016 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 # limitations under the License.
 #
 
-include_recipe "libarchive::default"
+include_recipe 'libarchive::default'
 
-libarchive_file "extract_yajsw" do
+libarchive_file 'extract_yajsw' do
   path "#{node['yajsw']['basedir']}/#{node['yajsw']['file']}"
   extract_to node['yajsw']['basedir']
   owner node['yajsw']['user']
@@ -31,5 +31,5 @@ remote_file "#{node['yajsw']['basedir']}/#{node['yajsw']['file']}" do
   owner node['yajsw']['user']
   checksum node['yajsw']['checksum']
   action :create_if_missing
-  notifies :extract, "libarchive_file[extract_yajsw]", :immediately
+  notifies :extract, 'libarchive_file[extract_yajsw]', :immediately
 end

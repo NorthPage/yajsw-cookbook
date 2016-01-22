@@ -162,8 +162,7 @@ If `node['yajsw']['use_data_bag']` is `true`,  `yajsw` will require a data bag i
 
 ## License and Authors
 
-Author:: E Camden Fisher (<camden@northpage.com>)
-Copyright (C) 2015 NorthPage
+Copyright (C) 2015-2016 NorthPage
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
