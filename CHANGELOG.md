@@ -38,3 +38,6 @@
 
 - rubocop fixes
 - license updates
+
+# 0.3.3 [unreleased]
+- Update LICENSE file
