@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: yajsw-cookbook
-# Recipe:: package
+# Recipe:: prep
 #
 # Copyright (C) 2015-2016 NorthPage
 #
@@ -17,19 +17,5 @@
 # limitations under the License.
 #
 
-include_recipe 'libarchive::default'
-
-libarchive_file 'extract_yajsw' do
-  path "#{node['yajsw']['basedir']}/#{node['yajsw']['file']}"
-  extract_to node['yajsw']['basedir']
-  owner node['yajsw']['user']
-  action :nothing
-end
-
-remote_file "#{node['yajsw']['basedir']}/#{node['yajsw']['file']}" do
-  source node['yajsw']['url']
-  owner node['yajsw']['user']
-  checksum node['yajsw']['checksum']
-  action :create_if_missing
-  notifies :extract, 'libarchive_file[extract_yajsw]', :immediately
-end
+node.set['java']['jdk_version'] = '8'
+include_recipe 'java::default'

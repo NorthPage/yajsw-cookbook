@@ -14,16 +14,16 @@ describe 'yajsw::default' do
           end.converge(described_recipe)
         end
 
-        it 'should include yajsw::prep by default' do
-          expect(chef_run).to include_recipe('yajsw::prep')
+        it 'should include yajsw::java by default' do
+          expect(chef_run).to include_recipe('yajsw::java')
         end
 
-        it 'should include yajsw::package by default' do
-          expect(chef_run).to include_recipe('yajsw::package')
+        it 'should include yajsw::install by default' do
+          expect(chef_run).to include_recipe('yajsw::install')
         end
 
-        it 'should include yajsw::config_app by default' do
-          expect(chef_run).to include_recipe('yajsw::config_app')
+        it 'should include yajsw::app by default' do
+          expect(chef_run).to include_recipe('yajsw::app')
         end
       end
     end

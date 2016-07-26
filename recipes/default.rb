@@ -2,7 +2,7 @@
 # Cookbook Name:: yajsw-cookbook
 # Recipe:: default
 #
-# Copyright (C) 2015 NorthPage
+# Copyright (C) 2015-2016 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe 'yajsw::prep'
-include_recipe 'yajsw::package'
-include_recipe 'yajsw::config_app'
+include_recipe 'yajsw::java' if node['yajsw']['install_java']
+include_recipe 'yajsw::install'
+include_recipe 'yajsw::app'

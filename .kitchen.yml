@@ -12,13 +12,12 @@ provisioner:
 
 platforms:
   - name: ubuntu-14.04
-  - name: centos-6.6
-  - name: centos-7.0
+  - name: ubuntu-15.10
+  - name: centos-6.8
+  - name: centos-7.2
 
 suites:
   - name: default
     run_list:
-      - recipe[maven::default]
-      - recipe[git::default]
       - recipe[yajsw::default]
     attributes:
