@@ -39,5 +39,8 @@
 - rubocop fixes
 - license updates
 
-# 0.3.3 [unreleased]
+# 0.3.3
 - Update LICENSE file
+
+# 0.4.0
+- Migrate to chef custom resources

@@ -6,9 +6,9 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
 
 ## Supported Platforms
 
-* Ubuntu 14.x
+* Ubuntu 14.x, 15.x
 * Centos 6.x, 7.x
-* Chef 12.x
+* Chef 12.5.x or higher. Chef 11 is NOT SUPPORTED.
 
 ## Attributes
 
@@ -24,12 +24,6 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
     <td>String</td>
     <td>Where to download YAJSW</td>
     <td><tt>http://softlayer-dal.dl.sourceforge.net/project/yajsw/yajsw/yajsw-stable-11.11/yajsw-stable-11.11.zip</tt></td>
-  </tr>
-  <tr>
-    <td><tt>node['yajsw']['file']</tt></td>
-    <td>String</td>
-    <td>The name of the downloaded archive.</td>
-    <td><tt>yajsw-stable-11.11.zip</tt></td>
   </tr>
   <tr>
     <td><tt>node['yajsw']['checksum']</tt></td>
@@ -50,7 +44,7 @@ Read more about [YAJSW](http://yajsw.sourceforge.net/)
     <td><tt>/usr/local</tt></td>
   </tr>
   <tr>
-    <td><tt>node['yajsw']['appsdir']</tt></td>
+    <td><tt>node['yajsw']['apps_home']</tt></td>
     <td>String</td>
     <td>The directory to use for YAJSW managed application.</td>
     <td><tt>/usr/local/yajsw_apps</tt></td>
@@ -127,11 +121,23 @@ Include `yajsw` in your node's `run_list`:
 The default implementation will install yajsw in `/usr/local/` and create an application dir in `/usr/local/yajsw_apps`.
 
 
-### LWRP
+### Custom Resources
 
-If you prefer, you can use the YAJSW recipes individually, and configure your application with the included LWRP.
+If you prefer, you can use the YAJSW recipes individually, or configure your application with the included Custom Resources.
 
-*Note:* The LWRP will not install yajsw, use `recipe[yajsw::package]` for that.
+### yajsw_install
+
+yajsw_install will install the specified version of yajsw
+
+```ruby
+    yajsw_install 'default' do
+      marker 'stable'
+      version '11.11'
+      checksum 'aeb845a7d77184b8a1cbd68ae26c7f07a74952f6e79fb31d3f8f41ba52c4c872'
+      user yajsw
+      action :create
+    end
+```
 
 ### yajsw_app
 

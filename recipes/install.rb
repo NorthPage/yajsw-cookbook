@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: yajsw-cookbook
-# Recipe:: prep
+# Recipe:: install
 #
 # Copyright (C) 2015-2016 NorthPage
 #
@@ -17,5 +17,12 @@
 # limitations under the License.
 #
 
-node.set['java']['jdk_version'] = '7'
-include_recipe 'java::default'
+yajsw_install 'default' do
+  url node['yajsw']['url']
+  marker node['yajsw']['marker']
+  version node['yajsw']['version']
+  basedir node['yajsw']['basedir']
+  checksum node['yajsw']['checksum']
+  user node['yajsw']['user']
+  action :create
+end

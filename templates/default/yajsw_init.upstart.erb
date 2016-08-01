@@ -1,0 +1,22 @@
+description "<%= @appname %> Upstart script"
+author "NorthPage"
+
+start on filesystem or runlevel [2345]
+stop on shutdown
+
+env DAEMON=<%= @java %> -Dwrapper.pidfile=<%= @pidfile_dir %>/wrapper.<%= @appname %>.pid \
+  -Dwrapper.service=true -Dwrapper.visible=false \
+  -Djna_tmpdir=<%= @apphome %>/tmp -Dwrapper_home=<%= @yajswhome %> \
+  -Dapp_home=<%= @apphome %> -jar <%= @yajswhome %>/wrapper.jar
+
+#expect fork
+
+pre-start script
+  $DAEMON=$DAEMON -tx <%= @apphome %>/conf/wrapper.conf
+end script
+
+pre-stop script
+  $DAEMON=$DAEMON -px <%= @apphome %>/conf/wrapper.conf
+end script
+
+exec $DAEMON

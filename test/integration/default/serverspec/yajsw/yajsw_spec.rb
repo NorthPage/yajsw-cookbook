@@ -17,17 +17,24 @@ end
   end
 end
 
-if os[:family] == 'redhat' && Gem::Version.new(os[:release]) >= Gem::Version.new('7.0.0')
-  describe file('/usr/lib/systemd/system/myapp.service') do
+if (os[:family] == 'redhat' && os[:release].to_i >= 7) ||
+    (os[:family] == 'ubuntu' && os[:release].to_i >= 15) ||
+    (os[:family] == 'debian' && os[:release].to_i >= 8)
+  describe file('/etc/systemd/system/myapp.service') do
     it { should be_file }
     it { should be_owned_by 'root' }
     its(:content) { should match(%r{^PIDFile=/var/run/wrapper.myapp.pid}) }
   end
-else
+elsif os[:family] == 'redhat' || os[:family] == 'debian'
   describe file('/etc/init.d/myapp') do
     it { should be_file }
     it { should be_owned_by 'root' }
     its(:content) { should match(%r{^APP_HOME=/usr/local/yajsw_apps/myapp}) }
+  end
+elsif os[:family] == 'ubuntu'
+  describe file('/etc/init.d/myapp.conf') do
+    it { should be_file }
+    it { should be_owned_by 'root' }
   end
 end
 

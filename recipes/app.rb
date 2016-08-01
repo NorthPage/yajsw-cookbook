@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: yajsw-cookbook
-# Recipe:: config_app
+# Recipe:: app
 #
-# Copyright (C) 2015 NorthPage
+# Copyright (C) 2015-2016 NorthPage
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,8 @@ end
 
 apps.each do |app|
   yajsw_app app['name'] do
-    user app['user']
+    apps_home  node['yajsw']['apps_home']
+    yajsw_user app['user']
     mainclass app['mainclass']
     jar app['jar']
     initmemory app['initmemory']
@@ -35,12 +36,14 @@ apps.each do |app|
     additional app['java_additional']
     parameters app['parameters']
     logfile app['logfile']
-    create_user true
+    manage_user true
     java "#{node['java']['java_home']}/bin/java"
-    action [:create, :update]
+    action :create
   end
 
-  service app['name'] do
+  service "yajsw_#{app['name']}" do
+    service_name app['name']
     action [:enable, :start]
+    only_if { ::File.exists? app['jar'] }
   end
 end
