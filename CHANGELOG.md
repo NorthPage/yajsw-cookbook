@@ -44,3 +44,6 @@
 
 # 0.4.0
 - Migrate to chef custom resources
+
+# 0.5.0
+- Bump libarchive to version 0.7
