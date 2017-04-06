@@ -7,7 +7,7 @@ default['yajsw']['install_java'] = true
 default['yajsw']['marker'] = 'stable'
 default['yajsw']['version'] = '11.11'
 default['yajsw']['checksum'] = 'aeb845a7d77184b8a1cbd68ae26c7f07a74952f6e79fb31d3f8f41ba52c4c872'
-default['yajsw']['url'] = "http://heanet.dl.sourceforge.net/project/yajsw/yajsw/yajsw-#{node['yajsw']['marker']}-#{node['yajsw']['version']}/yajsw-#{node['yajsw']['marker']}-#{node['yajsw']['version']}.zip"
+default['yajsw']['url'] = "https://pilotfiber.dl.sourceforge.net/project/yajsw/yajsw/yajsw-#{node['yajsw']['marker']}-#{node['yajsw']['version']}/yajsw-#{node['yajsw']['marker']}-#{node['yajsw']['version']}.zip"
 default['yajsw']['dirname'] = 'yajsw-stable-11.11'
 
 # yajsw install location
