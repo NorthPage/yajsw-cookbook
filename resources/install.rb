@@ -18,13 +18,13 @@
 # limitations under the License.
 
 property :name, default: 'default'
-property :url, String, default: nil
+property :url, [String, NilClass], default: nil
 property :marker, String, default: 'stable'
 property :version, String, default: '11.11'
 property :basedir, String, default: '/usr/local'
 property :checksum, String, default: ''
 property :user, String, default: 'root'
-s
+
 default_action :create
 
 action :create do
